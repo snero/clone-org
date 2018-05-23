@@ -7,8 +7,8 @@ import (
 
 	"golang.org/x/sync/errgroup"
 
-	cloneorg "github.com/caarlos0/clone-org"
-	"github.com/caarlos0/spin"
+	cloneorg "github.com/snero/clone-org"
+	"github.com/snero/spin"
 	"github.com/urfave/cli"
 )
 

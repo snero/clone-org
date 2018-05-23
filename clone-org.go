@@ -21,12 +21,21 @@ type Repo struct {
 
 // Clone a given repository into a given destination
 func Clone(repo Repo, destination string) error {
-	var cmd = exec.Command(
+	var cmd_clone = exec.Command(
 		"git", "clone", "--depth", "1", repo.URL,
 		filepath.Join(destination, repo.Name),
 	)
-	if bts, err := cmd.CombinedOutput(); err != nil {
-		return fmt.Errorf("git clone failed for %v: %v", repo.Name, string(bts))
+
+	if bts, err := cmd_clone.CombinedOutput(); err != nil {
+		fmt.Printf("before the pull command %v", string(bts))
+		var cmd_clone = exec.Command(
+			"git", "pull", "--depth", "1", repo.URL,
+			filepath.Join(destination, repo.Name),
+		)
+		fmt.Printf("after the pull command %v", repo.URL)
+		if bts, err := cmd_clone.CombinedOutput(); err != nil {
+			return fmt.Errorf("git clone failed for %v: %v", repo.Name, string(bts))
+		}
 	}
 	return nil
 }
